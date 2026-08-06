@@ -272,8 +272,6 @@ print(d["C"])   # Default 0
 # 16. NAMEDTUPLE
 from collections import namedtuple
 
-print("\n========== NAMEDTUPLE ==========")
-
 Student = namedtuple("Student",["name","age"])
 
 s = Student("John",21)
