@@ -11,7 +11,7 @@ result_mul = matrix * 2 #scalar broadCasting
 print("Multiplication: \n", result_mul)
 
 #Random Generator
-np.random.seed(42)
+np.random.seed(42) #--returns the same random set even after runnign every time
 
 random_array = np.random.rand(3, 3)
 print("Random Array: \n", random_array) # generate a random array of size 3X3
@@ -35,3 +35,13 @@ print("Modified Dataset: \n", dataset)
 print("Sum: ", np.sum(dataset))
 print("Mean: ", np.mean(dataset))
 print("Standard Deviation: ", np.std(dataset))
+
+
+# Boolean Indexing
+arr= np.array([1,2,3,4,5,6,7])
+evens= arr[arr%2==0]
+print(evens)
+odds=arr[arr%2==1]
+print(odds)
+arr[arr>3]=0
+print(arr)
