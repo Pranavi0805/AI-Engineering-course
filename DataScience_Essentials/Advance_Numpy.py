@@ -11,7 +11,7 @@ result_mul = matrix * 2 #scalar broadCasting
 print("Multiplication: \n", result_mul)
 
 #Random Generator
-np.random.seed(42) #--returns the same random set even after runnign every time
+np.random.seed(42) #--returns the same random set even after running every time
 
 random_array = np.random.rand(3, 3)
 print("Random Array: \n", random_array) # generate a random array of size 3X3
