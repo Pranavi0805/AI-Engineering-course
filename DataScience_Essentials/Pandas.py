@@ -220,3 +220,84 @@ print("Merged Dataset: \n", merged)
 
 merged["Score_Percentage"] = (merged["Score"] / 200) * 100
 print("Transformed Dataset \n", merged)
+
+                                        #Data Aggregation and Grouping in Pandas
+
+#Grouping Data By Categories:
+#--Why group data: allows u to perform ops on subsets of data based on shared categories
+#Group similar rows together, then perform an operation on each group.
+#--using groupby
+#grouped=df.groupby("col_name")
+#Operations:
+    #Iteration:
+    #for name,group in grouped:
+        #print(name,group)
+    #Apply Aggregation
+    #grouped.mean()
+    #grouped.sum()
+print("Grouping Example:")
+df = pd.DataFrame({
+    "Department": ["IT", "IT", "HR", "HR", "Sales"],
+    "Salary": [30000, 40000, 25000, 35000, 50000]
+})
+
+print(df)
+grouped = df.groupby("Department")
+print(grouped["Salary"].mean())
+df.groupby("Department")["Salary"].sum()
+
+#Aggregate Functions:
+
+#using groupby:
+#df.groupby("categorical_col")[numerical_col].mean()
+#df.groupby("categorical_col").agg({"numerical_col":["mean","sum","min","max"]}) -- MultiAggregation
+
+#using pivotTable: --reshape the data with aggregation if you use pivot table function
+
+# pivot= df.pivot_table{
+#     values= "numeric_col",
+#     index= "categorical_col",
+#     aggfunc="mean"
+# }
+
+#Custom Aggregation:
+# def range_func(x):
+#     return x.max()-x.min()
+# df.groupby("categorical_col")[numerical_col].agg(range_func)
+
+#Example:
+df = pd.DataFrame({
+    "Department": ["IT", "IT", "HR", "HR", "Marketing", "Marketing"],
+    "Sales": [1050, 2100, 1500, 2550, 3050, 4500]
+})
+
+grouped = df.groupby("Department")
+
+# 1. Groupby - Single Aggregation
+print(df.groupby("Department")["Sales"].mean())
+
+# 2. Groupby - Multiple Aggregations
+print(df.groupby("Department").agg({
+    "Sales": ["mean", "sum", "min", "max"]
+}))
+
+# 3. Pivot Table - Aggregation
+pivot = df.pivot_table(
+    values="Sales",
+    index="Department",
+    aggfunc="mean"
+)
+print(pivot)
+
+# 4. Custom Aggregation - Range
+def range_func(x):
+    return x.max() - x.min()
+
+print(df.groupby("Department")["Sales"].agg(range_func))
+
+# 5. Custom function for variance
+# Variance = average of (value - mean)²
+def variance_func(x):
+    mean = x.mean()
+    return ((x - mean) ** 2).mean()
+print(df.groupby("Department")["Sales"].agg(variance_func))
